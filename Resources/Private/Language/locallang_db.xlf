@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-12T16:18:37Z" product-name="beuser_manager">
+		<header/>
+		<body>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser">
+				<source>Backend User</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.username">
+				<source>Username</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.password">
+				<source>Password</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.real_name">
+				<source>Real Name</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.usergroup">
+				<source>Usergroup</source>
+			</trans-unit>
+			<trans-unit id="be_users.tx_extbase_type.Tx_BeuserManager_BackendUser">
+				<source>Backend user manager BackendUser</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backendusergroup">
+				<source>Backend User Group</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backendusergroup.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backendusergroup.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="be_groups.tx_extbase_type.Tx_BeuserManager_BackendUserGroup">
+				<source>Backend user manager BackendUserGroup</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

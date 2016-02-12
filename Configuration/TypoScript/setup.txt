@@ -1,0 +1,12 @@
+
+ # Module configuration
+module.tx_beusermanager_user_beusermanagermanager {
+	persistence {
+		storagePid = {$module.tx_beusermanager_manager.persistence.storagePid}
+	}
+	view {
+		templateRootPaths.0 = {$module.tx_beusermanager_manager.view.templateRootPath}
+		partialRootPaths.0 = {$module.tx_beusermanager_manager.view.partialRootPath}
+		layoutRootPaths.0 = {$module.tx_beusermanager_manager.view.layoutRootPath}
+	}
+}
