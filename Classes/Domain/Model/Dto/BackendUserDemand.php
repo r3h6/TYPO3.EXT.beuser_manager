@@ -1,5 +1,5 @@
 <?php
-namespace R3H6\BeuserManager\Domain\Repository;
+namespace R3H6\BeuserManager\Domain\Model\Dto;
 
 /***************************************************************
  *
@@ -27,40 +27,34 @@ namespace R3H6\BeuserManager\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for BackendUsers
+ * Backend user demand
  */
-class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class BackendUserDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-    protected static $systemUsers = ['_cli_lowlevel', '_cli_scheduler'];
+    /**
+     * Search term
+     *
+     * @var string
+     */
+    protected $search;
 
-    public function findDemanded(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand)
+    /**
+     * Get search
+     *
+     * @return  string  Search term
+     */
+    public function getSearch()
     {
-        /** @var TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
-        $query = $this->createQuery();
-
-        $constraints = [];
-        $constraints[] = $query->logicalNot(
-            $query->in('username', static::$systemUsers)
-        );
-
-        if (!$this->getBackendUser()->isAdmin()) {
-            $constraints[] = $query->equals('admin', false);
-        }
-
-        $query->matching(
-            $query->logicalAnd($constraints)
-        );
-
-        return $query->execute();
+        return $this->search;
     }
 
     /**
-     * Backend user
+     * Set search
      *
-     * @return TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @param   string $search  Search term
      */
-    protected function getBackendUser()
+    public function setSearch($search)
     {
-        return $GLOBALS['BE_USER'];
+        $this->search = $search;
     }
 }

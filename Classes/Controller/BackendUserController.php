@@ -38,19 +38,23 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @var \R3H6\BeuserManager\Domain\Repository\BackendUserRepository
      * @inject
      */
-    protected $backendUserRepository = NULL;
-    
+    protected $backendUserRepository = null;
+
     /**
      * action list
      *
+     * @param \R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand
      * @return void
      */
-    public function listAction()
+    public function listAction(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand = null)
     {
-        $backendUsers = $this->backendUserRepository->findAll();
+        if ($demand === null) {
+            $demand = $this->objectManager->get(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand::class);
+        }
+        $backendUsers = $this->backendUserRepository->findDemanded($demand);
         $this->view->assign('backendUsers', $backendUsers);
     }
-    
+
     /**
      * action new
      *
@@ -58,9 +62,9 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-        
+
     }
-    
+
     /**
      * action create
      *
@@ -73,7 +77,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->add($newBackendUser);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      *
