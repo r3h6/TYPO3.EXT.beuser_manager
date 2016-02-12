@@ -10,6 +10,6 @@ module.tx_beusermanager_manager {
 	}
 	persistence {
 		# cat=module.tx_beusermanager_manager//a; type=string; label=Default storage PID
-		storagePid =
+		storagePid = 0
 	}
 }

@@ -1,3 +1,4 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:beuser_manager/Configuration/TypoScript/setup.txt">
 
 config.tx_extbase{
     persistence{
@@ -6,17 +7,15 @@ config.tx_extbase{
             R3H6\BeuserManager\Domain\Model\BackendUser {
                 mapping {
                     tableName = be_users
-                    recordType = Tx_BeuserManager_BackendUser
                 }
             }
-            
+
             R3H6\BeuserManager\Domain\Model\BackendUserGroup {
                 mapping {
                     tableName = be_groups
-                    recordType = Tx_BeuserManager_BackendUserGroup
                 }
             }
-            
+
     	}
     }
 }
