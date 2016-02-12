@@ -15,7 +15,7 @@ if (TYPO3_MODE === 'BE') {
 		'',						// Position
 		array(
 			'BackendUser' => 'list, new, create, delete',
-			
+
 		),
 		array(
 			'access' => 'user,group',
@@ -25,7 +25,7 @@ if (TYPO3_MODE === 'BE') {
 	);
 
 
-	$GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][$_EXTKEY] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('R3H6\\BeuserManager\\Domain\\Model\\Dto\\ManagerModulPermission');
+	$GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][\R3H6\BeuserManager\Domain\Model\BackendUserGroup::ALLOWED_BACKEND_GROUPS_PERMISSION] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('R3H6\\BeuserManager\\Domain\\Model\\Dto\\AllowedBackendGroupsPermission');
 
 }
 

@@ -7,12 +7,20 @@ config.tx_extbase{
             R3H6\BeuserManager\Domain\Model\BackendUser {
                 mapping {
                     tableName = be_users
+                    columns {
+                        crdate.mapOnProperty = creationDate
+                        cruser_id.mapOnProperty = createdBy
+                    }
                 }
             }
 
             R3H6\BeuserManager\Domain\Model\BackendUserGroup {
                 mapping {
                     tableName = be_groups
+                    columns {
+                        crdate.mapOnProperty = creationDate
+                        cruser_id.mapOnProperty = createdBy
+                    }
                 }
             }
 

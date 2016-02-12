@@ -27,9 +27,9 @@ namespace R3H6\BeuserManager\Domain\Model\Dto;
  ***************************************************************/
 
 /**
- * The repository for BackendUserGroups
+ * Allowed backend groups permission
  */
-class ManagerModulPermission implements \ArrayAccess
+class AllowedBackendGroupsPermission implements \ArrayAccess
 {
     protected static $locallang = 'EXT:beuser_manager/Resources/Private/Language/locallang_be.xlf';
     protected $array = null;

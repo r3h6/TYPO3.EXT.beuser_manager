@@ -39,7 +39,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $username = '';
-    
+
     /**
      * Password
      *
@@ -47,50 +47,49 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $password = '';
-    
+
     /**
      * Name
      *
      * @var string
      */
     protected $realName = '';
-    
+
     /**
      * E-mail
      *
      * @var string
      */
     protected $email = '';
-    
+
     /**
      * Description
      *
      * @var string
      */
     protected $description = '';
-    
+
     /**
      * Admin
      *
      * @var bool
      */
     protected $admin = false;
-    
+
     /**
      * Creation date
      *
      * @var \DateTime
      */
     protected $creationDate = null;
-    
+
     /**
      * Usergroup
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup>
-     * @cascade remove
      */
     protected $usergroup = null;
-    
+
     /**
      * Created by
      *
@@ -98,143 +97,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $createdBy = null;
-    
-    /**
-     * Returns the username
-     *
-     * @return string $username
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-    
-    /**
-     * Sets the username
-     *
-     * @param string $username
-     * @return void
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
-    
-    /**
-     * Returns the password
-     *
-     * @return string $password
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    
-    /**
-     * Sets the password
-     *
-     * @param string $password
-     * @return void
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-    
-    /**
-     * Returns the realName
-     *
-     * @return string $realName
-     */
-    public function getRealName()
-    {
-        return $this->realName;
-    }
-    
-    /**
-     * Sets the realName
-     *
-     * @param string $realName
-     * @return void
-     */
-    public function setRealName($realName)
-    {
-        $this->realName = $realName;
-    }
-    
-    /**
-     * Returns the email
-     *
-     * @return string $email
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    
-    /**
-     * Sets the email
-     *
-     * @param string $email
-     * @return void
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-    
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-    
-    /**
-     * Sets the description
-     *
-     * @param string $description
-     * @return void
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-    
-    /**
-     * Returns the admin
-     *
-     * @return bool $admin
-     */
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-    
-    /**
-     * Sets the admin
-     *
-     * @param bool $admin
-     * @return void
-     */
-    public function setAdmin($admin)
-    {
-        $this->admin = $admin;
-    }
-    
-    /**
-     * Returns the boolean state of admin
-     *
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return $this->admin;
-    }
-    
+
     /**
      * __construct
      */
@@ -243,7 +106,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -256,7 +119,143 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->usergroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-    
+
+    /**
+     * Returns the username
+     *
+     * @return string $username
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Sets the username
+     *
+     * @param string $username
+     * @return void
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * Returns the password
+     *
+     * @return string $password
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Sets the password
+     *
+     * @param string $password
+     * @return void
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Returns the realName
+     *
+     * @return string $realName
+     */
+    public function getRealName()
+    {
+        return $this->realName;
+    }
+
+    /**
+     * Sets the realName
+     *
+     * @param string $realName
+     * @return void
+     */
+    public function setRealName($realName)
+    {
+        $this->realName = $realName;
+    }
+
+    /**
+     * Returns the email
+     *
+     * @return string $email
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the email
+     *
+     * @param string $email
+     * @return void
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Returns the admin
+     *
+     * @return bool $admin
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * Sets the admin
+     *
+     * @param bool $admin
+     * @return void
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * Returns the boolean state of admin
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
+
     /**
      * Returns the creationDate
      *
@@ -266,7 +265,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creationDate;
     }
-    
+
     /**
      * Sets the creationDate
      *
@@ -277,7 +276,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creationDate = $creationDate;
     }
-    
+
     /**
      * Adds a BackendUserGroup
      *
@@ -288,7 +287,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->usergroup->attach($usergroup);
     }
-    
+
     /**
      * Removes a BackendUserGroup
      *
@@ -299,7 +298,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->usergroup->detach($usergroupToRemove);
     }
-    
+
     /**
      * Returns the usergroup
      *
@@ -309,7 +308,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->usergroup;
     }
-    
+
     /**
      * Sets the usergroup
      *
@@ -320,7 +319,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->usergroup = $usergroup;
     }
-    
+
     /**
      * Returns the createdBy
      *
@@ -330,7 +329,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->createdBy;
     }
-    
+
     /**
      * Sets the createdBy
      *

@@ -26,11 +26,14 @@ namespace R3H6\BeuserManager\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Backend user group
  */
 class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+    const ALLOWED_BACKEND_GROUPS_PERMISSION = 'tx_beusermanager_allowedbackendgroups';
 
     /**
      * Title
@@ -39,28 +42,28 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $title = '';
-    
+
     /**
      * Description
      *
      * @var string
      */
     protected $description = '';
-    
+
     /**
      * customOptions
      *
      * @var string
      */
     protected $customOptions = '';
-    
+
     /**
      * Creation date
      *
      * @var \DateTime
      */
     protected $creationDate = null;
-    
+
     /**
      * Created by
      *
@@ -68,7 +71,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $createdBy = null;
-    
+
     /**
      * Returns the title
      *
@@ -78,7 +81,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->title;
     }
-    
+
     /**
      * Sets the title
      *
@@ -89,7 +92,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->title = $title;
     }
-    
+
     /**
      * Returns the description
      *
@@ -99,7 +102,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->description;
     }
-    
+
     /**
      * Sets the description
      *
@@ -110,29 +113,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->description = $description;
     }
-    
-    /**
-     * __construct
-     */
-    public function __construct()
-    {
-        //Do not remove the next line: It would break the functionality
-        $this->initStorageObjects();
-    }
-    
-    /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     *
-     * @return void
-     */
-    protected function initStorageObjects()
-    {
-        
-    }
-    
+
     /**
      * Returns the customOptions
      *
@@ -142,7 +123,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->customOptions;
     }
-    
+
     /**
      * Sets the customOptions
      *
@@ -153,7 +134,19 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->customOptions = $customOptions;
     }
-    
+
+    public function getAllowedBackendGroups()
+    {
+        $customOptions = GeneralUtility::trimExplode(',', $this->customOptions, true);
+        $allowedBackendGroups = [];
+        foreach ($customOptions as $optionValue) {
+            if (strpos($optionValue, self::ALLOWED_BACKEND_GROUPS_PERMISSION) === 0) {
+                $allowedBackendGroups[] = (int) substr($optionValue, strlen(self::ALLOWED_BACKEND_GROUPS_PERMISSION) + 1);
+            }
+        }
+        return $allowedBackendGroups;
+    }
+
     /**
      * Returns the creationDate
      *
@@ -163,7 +156,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creationDate;
     }
-    
+
     /**
      * Sets the creationDate
      *
@@ -174,7 +167,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creationDate = $creationDate;
     }
-    
+
     /**
      * Returns the createdBy
      *
@@ -184,7 +177,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->createdBy;
     }
-    
+
     /**
      * Sets the createdBy
      *
