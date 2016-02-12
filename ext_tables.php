@@ -15,7 +15,7 @@ if (TYPO3_MODE === 'BE') {
 		'',						// Position
 		array(
 			'BackendUser' => 'list, new, create, delete',
-
+			
 		),
 		array(
 			'access' => 'user,group',

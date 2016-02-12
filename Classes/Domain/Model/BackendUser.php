@@ -70,18 +70,34 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
     
     /**
-     * Usergroup
-     *
-     * @var \R3H6\BeuserManager\Domain\Model\BackendUserGroup
-     */
-    protected $usergroup = null;
-    
-    /**
      * Admin
      *
      * @var bool
      */
     protected $admin = false;
+    
+    /**
+     * Creation date
+     *
+     * @var \DateTime
+     */
+    protected $creationDate = null;
+    
+    /**
+     * Usergroup
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup>
+     * @cascade remove
+     */
+    protected $usergroup = null;
+    
+    /**
+     * Created by
+     *
+     * @var \R3H6\BeuserManager\Domain\Model\BackendUser
+     * @lazy
+     */
+    protected $createdBy = null;
     
     /**
      * Returns the username
@@ -189,27 +205,6 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
     
     /**
-     * Returns the usergroup
-     *
-     * @return \R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup
-     */
-    public function getUsergroup()
-    {
-        return $this->usergroup;
-    }
-    
-    /**
-     * Sets the usergroup
-     *
-     * @param \R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup
-     * @return void
-     */
-    public function setUsergroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup)
-    {
-        $this->usergroup = $usergroup;
-    }
-    
-    /**
      * Returns the admin
      *
      * @return bool $admin
@@ -238,6 +233,113 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function isAdmin()
     {
         return $this->admin;
+    }
+    
+    /**
+     * __construct
+     */
+    public function __construct()
+    {
+        //Do not remove the next line: It would break the functionality
+        $this->initStorageObjects();
+    }
+    
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     *
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        $this->usergroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+    
+    /**
+     * Returns the creationDate
+     *
+     * @return \DateTime $creationDate
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+    
+    /**
+     * Sets the creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return void
+     */
+    public function setCreationDate(\DateTime $creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+    
+    /**
+     * Adds a BackendUserGroup
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup
+     * @return void
+     */
+    public function addUsergroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup)
+    {
+        $this->usergroup->attach($usergroup);
+    }
+    
+    /**
+     * Removes a BackendUserGroup
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroupToRemove The BackendUserGroup to be removed
+     * @return void
+     */
+    public function removeUsergroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroupToRemove)
+    {
+        $this->usergroup->detach($usergroupToRemove);
+    }
+    
+    /**
+     * Returns the usergroup
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup> $usergroup
+     */
+    public function getUsergroup()
+    {
+        return $this->usergroup;
+    }
+    
+    /**
+     * Sets the usergroup
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup> $usergroup
+     * @return void
+     */
+    public function setUsergroup(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $usergroup)
+    {
+        $this->usergroup = $usergroup;
+    }
+    
+    /**
+     * Returns the createdBy
+     *
+     * @return \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+    
+    /**
+     * Sets the createdBy
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     * @return void
+     */
+    public function setCreatedBy(\R3H6\BeuserManager\Domain\Model\BackendUser $createdBy)
+    {
+        $this->createdBy = $createdBy;
     }
 
 }

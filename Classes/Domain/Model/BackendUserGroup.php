@@ -48,6 +48,28 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
     
     /**
+     * customOptions
+     *
+     * @var string
+     */
+    protected $customOptions = '';
+    
+    /**
+     * Creation date
+     *
+     * @var \DateTime
+     */
+    protected $creationDate = null;
+    
+    /**
+     * Created by
+     *
+     * @var \R3H6\BeuserManager\Domain\Model\BackendUser
+     * @lazy
+     */
+    protected $createdBy = null;
+    
+    /**
      * Returns the title
      *
      * @return string $title
@@ -87,6 +109,91 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+    
+    /**
+     * __construct
+     */
+    public function __construct()
+    {
+        //Do not remove the next line: It would break the functionality
+        $this->initStorageObjects();
+    }
+    
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     *
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        
+    }
+    
+    /**
+     * Returns the customOptions
+     *
+     * @return string $customOptions
+     */
+    public function getCustomOptions()
+    {
+        return $this->customOptions;
+    }
+    
+    /**
+     * Sets the customOptions
+     *
+     * @param string $customOptions
+     * @return void
+     */
+    public function setCustomOptions($customOptions)
+    {
+        $this->customOptions = $customOptions;
+    }
+    
+    /**
+     * Returns the creationDate
+     *
+     * @return \DateTime $creationDate
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+    
+    /**
+     * Sets the creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return void
+     */
+    public function setCreationDate(\DateTime $creationDate)
+    {
+        $this->creationDate = $creationDate;
+    }
+    
+    /**
+     * Returns the createdBy
+     *
+     * @return \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+    
+    /**
+     * Sets the createdBy
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     * @return void
+     */
+    public function setCreatedBy(\R3H6\BeuserManager\Domain\Model\BackendUser $createdBy)
+    {
+        $this->createdBy = $createdBy;
     }
 
 }

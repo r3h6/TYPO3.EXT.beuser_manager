@@ -4,7 +4,7 @@
             "config": {
                 "position": [
                     135,
-                    126.44444694637
+                    127
                 ]
             },
             "name": "New Model Object",
@@ -94,6 +94,16 @@
                             "propertyName": "admin",
                             "propertyType": "Boolean",
                             "uid": "624451831020"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "Creation date",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "creationDate",
+                            "propertyType": "DateTime",
+                            "uid": "1155852450037"
                         }
                     ]
                 },
@@ -105,9 +115,19 @@
                             "propertyIsExcludeField": false,
                             "relationDescription": "Usergroup",
                             "relationName": "usergroup",
-                            "relationType": "zeroToOne",
+                            "relationType": "zeroToMany",
                             "relationWire": "[wired]",
                             "uid": "427074151463"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": true,
+                            "propertyIsExcludeField": false,
+                            "relationDescription": "Created by",
+                            "relationName": "createdBy",
+                            "relationType": "manyToOne",
+                            "relationWire": "[wired]",
+                            "uid": "175933638318"
                         }
                     ]
                 }
@@ -117,7 +137,7 @@
             "config": {
                 "position": [
                     390,
-                    129.44444694637
+                    130
                 ]
             },
             "name": "New Model Object",
@@ -167,12 +187,41 @@
                             "propertyName": "description",
                             "propertyType": "Text",
                             "uid": "607751295937"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "customOptions",
+                            "propertyType": "Text",
+                            "uid": "1426255767510"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "Creation date",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "creationDate",
+                            "propertyType": "DateTime",
+                            "uid": "1320870470408"
                         }
                     ]
                 },
                 "relationGroup": {
                     "relations": [
-
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": true,
+                            "propertyIsExcludeField": false,
+                            "relationDescription": "Created by",
+                            "relationName": "createdBy",
+                            "relationType": "manyToOne",
+                            "relationWire": "[wired]",
+                            "uid": "1424658224793"
+                        }
                     ]
                 }
             }
@@ -233,10 +282,34 @@
                 "terminal": "SOURCES",
                 "uid": "654207077695"
             }
+        },
+        {
+            "src": {
+                "moduleId": 1,
+                "terminal": "relationWire_0",
+                "uid": "1424658224793"
+            },
+            "tgt": {
+                "moduleId": 0,
+                "terminal": "SOURCES",
+                "uid": "1096507008643"
+            }
+        },
+        {
+            "src": {
+                "moduleId": 0,
+                "terminal": "relationWire_1",
+                "uid": "175933638318"
+            },
+            "tgt": {
+                "moduleId": 0,
+                "terminal": "SOURCES",
+                "uid": "1096507008643"
+            }
         }
     ],
     "log": {
-        "last_modified": "2016-02-12 04:30",
+        "last_modified": "2016-02-12 07:57",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

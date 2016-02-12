@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-12T16:30:51Z" product-name="beuser_manager">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-12T19:57:19Z" product-name="beuser_manager">
 		<header/>
 		<body>
 			<trans-unit id="username.description">
@@ -21,8 +21,14 @@
 			<trans-unit id="admin.description">
 				<source>Admin</source>
 			</trans-unit>
+			<trans-unit id="creation_date.description">
+				<source>Creation date</source>
+			</trans-unit>
 			<trans-unit id="usergroup.description">
 				<source>Usergroup</source>
+			</trans-unit>
+			<trans-unit id="created_by.description">
+				<source>Created by</source>
 			</trans-unit>
 		</body>
 	</file>

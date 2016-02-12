@@ -39,7 +39,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @inject
      */
     protected $backendUserRepository = null;
-
+    
     /**
      * action list
      *
@@ -54,7 +54,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $backendUsers = $this->backendUserRepository->findDemanded($demand);
         $this->view->assign('backendUsers', $backendUsers);
     }
-
+    
     /**
      * action new
      *
@@ -62,9 +62,9 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-
+        
     }
-
+    
     /**
      * action create
      *
@@ -77,7 +77,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->add($newBackendUser);
         $this->redirect('list');
     }
-
+    
     /**
      * action delete
      *

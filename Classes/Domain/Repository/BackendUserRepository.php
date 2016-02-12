@@ -1,6 +1,7 @@
 <?php
 namespace R3H6\BeuserManager\Domain\Repository;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,36 +27,30 @@ namespace R3H6\BeuserManager\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * The repository for BackendUsers
  */
 class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-    protected static $systemUsers = ['_cli_lowlevel', '_cli_scheduler'];
 
+    protected static $systemUsers = array('_cli_lowlevel', '_cli_scheduler');
+    
+    /**
+     * @param \R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand
+     */
     public function findDemanded(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand)
     {
         /** @var TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
-
-        $constraints = [];
-        $constraints[] = $query->logicalNot(
-            $query->in('username', static::$systemUsers)
-        );
-
+        $constraints = array();
+        $constraints[] = $query->logicalNot($query->in('username', static::$systemUsers));
         if (!$this->getBackendUser()->isAdmin()) {
             $constraints[] = $query->equals('admin', false);
         }
-
-        $query->matching(
-            $query->logicalAnd($constraints)
-        );
-
+        $query->matching($query->logicalAnd($constraints));
         // custom_options beuser_manager:2,beuser_manager:3,beuser_manager:1
         $customOptions = GeneralUtility::trimExplode(',', $this->getBackendUser()->groupData['custom_options'], true);
-        $grantedGroups = [];
+        $grantedGroups = array();
         if (!empty($customOptions)) {
             foreach ($customOptions as $optionValue) {
                 if (strpos($optionValue, 'beuser_manager:') === 0) {
@@ -63,13 +58,10 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 }
             }
         }
-
-
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($grantedGroups);
-
         return $query->execute();
     }
-
+    
     /**
      * Backend user
      *
@@ -79,4 +71,5 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         return $GLOBALS['BE_USER'];
     }
+
 }

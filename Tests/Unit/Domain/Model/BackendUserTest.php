@@ -204,10 +204,37 @@ class BackendUserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
-	public function getUsergroupReturnsInitialValueForBackendUserGroup()
+	public function getCreationDateReturnsInitialValueForDateTime()
 	{
 		$this->assertEquals(
 			NULL,
+			$this->subject->getCreationDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreationDateForDateTimeSetsCreationDate()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setCreationDate($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'creationDate',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUsergroupReturnsInitialValueForBackendUserGroup()
+	{
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
 			$this->subject->getUsergroup()
 		);
 	}
@@ -215,14 +242,69 @@ class BackendUserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
-	public function setUsergroupForBackendUserGroupSetsUsergroup()
+	public function setUsergroupForObjectStorageContainingBackendUserGroupSetsUsergroup()
 	{
-		$usergroupFixture = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
-		$this->subject->setUsergroup($usergroupFixture);
+		$usergroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$objectStorageHoldingExactlyOneUsergroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneUsergroup->attach($usergroup);
+		$this->subject->setUsergroup($objectStorageHoldingExactlyOneUsergroup);
 
 		$this->assertAttributeEquals(
-			$usergroupFixture,
+			$objectStorageHoldingExactlyOneUsergroup,
 			'usergroup',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addUsergroupToObjectStorageHoldingUsergroup()
+	{
+		$usergroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$usergroupObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$usergroupObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($usergroup));
+		$this->inject($this->subject, 'usergroup', $usergroupObjectStorageMock);
+
+		$this->subject->addUsergroup($usergroup);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeUsergroupFromObjectStorageHoldingUsergroup()
+	{
+		$usergroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$usergroupObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$usergroupObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($usergroup));
+		$this->inject($this->subject, 'usergroup', $usergroupObjectStorageMock);
+
+		$this->subject->removeUsergroup($usergroup);
+
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreatedByReturnsInitialValueForBackendUser()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getCreatedBy()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreatedByForBackendUserSetsCreatedBy()
+	{
+		$createdByFixture = new \R3H6\BeuserManager\Domain\Model\BackendUser();
+		$this->subject->setCreatedBy($createdByFixture);
+
+		$this->assertAttributeEquals(
+			$createdByFixture,
+			'createdBy',
 			$this->subject
 		);
 	}

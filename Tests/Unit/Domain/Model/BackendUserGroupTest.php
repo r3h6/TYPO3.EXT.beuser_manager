@@ -100,4 +100,81 @@ class BackendUserGroupTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getCustomOptionsReturnsInitialValueForString()
+	{
+		$this->assertSame(
+			'',
+			$this->subject->getCustomOptions()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCustomOptionsForStringSetsCustomOptions()
+	{
+		$this->subject->setCustomOptions('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'customOptions',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreationDateReturnsInitialValueForDateTime()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getCreationDate()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreationDateForDateTimeSetsCreationDate()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setCreationDate($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'creationDate',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCreatedByReturnsInitialValueForBackendUser()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getCreatedBy()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCreatedByForBackendUserSetsCreatedBy()
+	{
+		$createdByFixture = new \R3H6\BeuserManager\Domain\Model\BackendUser();
+		$this->subject->setCreatedBy($createdByFixture);
+
+		$this->assertAttributeEquals(
+			$createdByFixture,
+			'createdBy',
+			$this->subject
+		);
+	}
 }
