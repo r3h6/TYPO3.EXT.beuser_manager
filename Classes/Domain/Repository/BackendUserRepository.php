@@ -26,6 +26,8 @@ namespace R3H6\BeuserManager\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * The repository for BackendUsers
  */
@@ -50,6 +52,20 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->matching(
             $query->logicalAnd($constraints)
         );
+
+        // custom_options beuser_manager:2,beuser_manager:3,beuser_manager:1
+        $customOptions = GeneralUtility::trimExplode(',', $this->getBackendUser()->groupData['custom_options'], true);
+        $grantedGroups = [];
+        if (!empty($customOptions)) {
+            foreach ($customOptions as $optionValue) {
+                if (strpos($optionValue, 'beuser_manager:') === 0) {
+                    $grantedGroups[] = (int) substr($optionValue, strlen('beuser_manager:'));
+                }
+            }
+        }
+
+
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($grantedGroups);
 
         return $query->execute();
     }

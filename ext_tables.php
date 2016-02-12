@@ -15,7 +15,7 @@ if (TYPO3_MODE === 'BE') {
 		'',						// Position
 		array(
 			'BackendUser' => 'list, new, create, delete',
-			
+
 		),
 		array(
 			'access' => 'user,group',
@@ -24,6 +24,8 @@ if (TYPO3_MODE === 'BE') {
 		)
 	);
 
+
+	$GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][$_EXTKEY] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('R3H6\\BeuserManager\\Domain\\Model\\Dto\\ManagerModulPermission');
+
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Backend user manager');
