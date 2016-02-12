@@ -3,8 +3,8 @@
         {
             "config": {
                 "position": [
-                    136,
-                    126
+                    135,
+                    126.44444694637
                 ]
             },
             "name": "New Model Object",
@@ -84,6 +84,16 @@
                             "propertyName": "description",
                             "propertyType": "Text",
                             "uid": "223206134343"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "Admin",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "admin",
+                            "propertyType": "Boolean",
+                            "uid": "624451831020"
                         }
                     ]
                 },
@@ -107,7 +117,7 @@
             "config": {
                 "position": [
                     390,
-                    129
+                    129.44444694637
                 ]
             },
             "name": "New Model Object",
@@ -196,8 +206,8 @@
         },
         "extensionKey": "beuser_manager",
         "name": "Backend user manager",
-        "originalExtensionKey": "",
-        "originalVendorName": "",
+        "originalExtensionKey": "beuser_manager",
+        "originalVendorName": "R3H6",
         "persons": [
             {
                 "company": "",
@@ -226,7 +236,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-02-12 04:18",
+        "last_modified": "2016-02-12 04:30",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

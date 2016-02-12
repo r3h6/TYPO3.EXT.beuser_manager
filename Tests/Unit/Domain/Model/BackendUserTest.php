@@ -179,6 +179,31 @@ class BackendUserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
+	public function getAdminReturnsInitialValueForBool()
+	{
+		$this->assertSame(
+			FALSE,
+			$this->subject->getAdmin()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdminForBoolSetsAdmin()
+	{
+		$this->subject->setAdmin(TRUE);
+
+		$this->assertAttributeEquals(
+			TRUE,
+			'admin',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getUsergroupReturnsInitialValueForBackendUserGroup()
 	{
 		$this->assertEquals(

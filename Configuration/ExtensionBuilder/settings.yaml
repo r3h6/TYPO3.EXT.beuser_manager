@@ -52,7 +52,8 @@ overwriteSettings:
 
   Resources:
     Private:
-      #Language: merge
+      Backend: keep
+      Language: merge
       #Templates: keep
 
   ext_icon.gif: keep

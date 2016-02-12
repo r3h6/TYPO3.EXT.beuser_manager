@@ -77,6 +77,13 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $usergroup = null;
     
     /**
+     * Admin
+     *
+     * @var bool
+     */
+    protected $admin = false;
+    
+    /**
      * Returns the username
      *
      * @return string $username
@@ -200,6 +207,37 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setUsergroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $usergroup)
     {
         $this->usergroup = $usergroup;
+    }
+    
+    /**
+     * Returns the admin
+     *
+     * @return bool $admin
+     */
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+    
+    /**
+     * Sets the admin
+     *
+     * @param bool $admin
+     * @return void
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+    }
+    
+    /**
+     * Returns the boolean state of admin
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->admin;
     }
 
 }
