@@ -37,9 +37,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{backendUser : backendUser}"> {backendUser.description}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{backendUser : backendUser}"> {backendUser.admin}</f:link.action></td>
 			<td>
-			{backendUser.hidden}
-				<f:link.action action="hide" arguments="{backendUser : backendUser}">Hide</f:link.action>
-				<f:link.action action="unhide" arguments="{backendUser : backendUser}">Unhide</f:link.action>
+			{backendUser.disable}
+				<f:link.action action="disable" arguments="{backendUser : backendUser}">Hide</f:link.action>
+				<f:link.action action="enable" arguments="{backendUser : backendUser}">Unhide</f:link.action>
 				<f:link.action action="delete" arguments="{backendUser : backendUser}">Delete</f:link.action>
 			</td>
 		</tr>

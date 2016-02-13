@@ -34,12 +34,28 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     protected static $systemUsers = array('_cli_lowlevel', '_cli_scheduler');
-    
+
+    /**
+     * DataHandler (TCE)
+     *
+     * @var TYPO3\CMS\Core\DataHandling\DataHandler
+     * @inject
+     */
+    protected $dataHandler = null;
+
+    public function initializeObject()
+    {
+        /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings->setIgnoreEnableFields(true);
+        $this->setDefaultQuerySettings($querySettings);
+    }
+
     public function getBackendUser()
     {
         return $this->findByIdentifier($GLOBALS['BE_USER']->user['uid']);
     }
-    
+
     /**
      * @param \R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand
      */
@@ -56,5 +72,22 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->matching($query->logicalAnd($constraints));
         return $query->execute();
     }
+    /**
+     * Replaces an existing object with the same identifier by the given object
+     *
+     * @param object $modifiedObject The modified object
+     * @throws Exception\UnknownObjectException
+     * @throws Exception\IllegalObjectTypeException
+     * @return void
+     */
+    public function update($modifiedObject)
+    {
+        if (!$modifiedObject instanceof $this->objectType) {
+            throw new \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException('The modified object given to update() was not of the type (' . $this->objectType . ') this repository manages.', 1249479625);
+        }
 
+        $this->dataHandler->stripslashes_values = 0;
+        $this->dataHandler->start($modifiedObject->toDataArray(), []);
+        $this->dataHandler->process_datamap();
+    }
 }

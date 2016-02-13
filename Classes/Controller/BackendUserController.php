@@ -39,7 +39,14 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @inject
      */
     protected $backendUserRepository = null;
-    
+
+    public function initializeAction()
+    {
+        if ($this->request->hasArgument('backendUser')) {
+            $this->request->setArgument('backendUser', $this->backendUserRepository->findOneByUid($this->request->getArgument('backendUser')));
+        }
+    }
+
     /**
      * action list
      *
@@ -54,7 +61,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $backendUsers = $this->backendUserRepository->findDemanded($demand);
         $this->view->assign('backendUsers', $backendUsers);
     }
-    
+
     /**
      * action new
      *
@@ -62,9 +69,9 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-        
+
     }
-    
+
     /**
      * action create
      *
@@ -77,7 +84,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->add($newBackendUser);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      *
@@ -90,25 +97,33 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->remove($backendUser);
         $this->redirect('list');
     }
-    
+
     /**
      * action enable
      *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $backendUser
      * @return void
      */
-    public function enableAction()
+    public function enableAction(\R3H6\BeuserManager\Domain\Model\BackendUser $backendUser)
     {
-        
+        $backendUser->setDisable(false);
+        $this->backendUserRepository->update($backendUser);
+        $this->addFlashMessage('Enable');
+        $this->redirect('list');
     }
-    
+
     /**
      * action disable
      *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $backendUser
      * @return void
      */
-    public function disableAction()
+    public function disableAction(\R3H6\BeuserManager\Domain\Model\BackendUser $backendUser)
     {
-        
+        $backendUser->setDisable(true);
+        $this->backendUserRepository->update($backendUser);
+        $this->addFlashMessage('Enable');
+        $this->redirect('list');
     }
 
 }
