@@ -34,12 +34,12 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     protected static $systemUsers = array('_cli_lowlevel', '_cli_scheduler');
-    
+
     public function getBackendUser()
     {
         return $this->findByIdentifier($GLOBALS['BE_USER']->user['uid']);
     }
-    
+
     /**
      * @param \R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand
      */

@@ -39,7 +39,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      * @inject
      */
     protected $backendUserRepository = null;
-    
+
     /**
      * action list
      *
@@ -54,7 +54,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $backendUsers = $this->backendUserRepository->findDemanded($demand);
         $this->view->assign('backendUsers', $backendUsers);
     }
-    
+
     /**
      * action new
      *
@@ -62,9 +62,9 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
      */
     public function newAction()
     {
-        
+
     }
-    
+
     /**
      * action create
      *
@@ -77,7 +77,7 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->add($newBackendUser);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      *
@@ -90,25 +90,30 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->remove($backendUser);
         $this->redirect('list');
     }
-    
+
     /**
      * action hide
      *
      * @return void
      */
-    public function hideAction()
+    public function hideAction(\R3H6\BeuserManager\Domain\Model\BackendUser $backendUser)
     {
-        
+        $backendUser->setHidden(true);
+        $this->backendUserRepository->update($backendUser);
+        $this->addFlashMessage('Hide');
+        $this->redirect('list');
     }
-    
+
     /**
      * action unhide
      *
      * @return void
      */
-    public function unhideAction()
+    public function unhideAction(\R3H6\BeuserManager\Domain\Model\BackendUser $backendUser)
     {
-        
+        $backendUser->setHidden(false);
+        $this->backendUserRepository->update($backendUser);
+        $this->addFlashMessage('Unhide');
+        $this->redirect('list');
     }
-
 }

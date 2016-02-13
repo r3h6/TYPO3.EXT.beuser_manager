@@ -39,7 +39,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $username = '';
-    
+
     /**
      * Password
      *
@@ -47,49 +47,49 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $password = '';
-    
+
     /**
      * Name
      *
      * @var string
      */
     protected $realName = '';
-    
+
     /**
      * E-mail
      *
      * @var string
      */
     protected $email = '';
-    
+
     /**
      * Description
      *
      * @var string
      */
     protected $description = '';
-    
+
     /**
      * Admin
      *
      * @var bool
      */
     protected $admin = false;
-    
+
     /**
      * Creation date
      *
      * @var \DateTime
      */
     protected $creationDate = null;
-    
+
     /**
      * Usergroup
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup>
      */
     protected $groups = null;
-    
+
     /**
      * Created by
      *
@@ -97,28 +97,28 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $creator = null;
-    
+
     /**
      * startTime
      *
      * @var \DateTime
      */
     protected $startTime = null;
-    
+
     /**
      * endTime
      *
      * @var \DateTime
      */
     protected $endTime = null;
-    
+
     /**
      * hidden
      *
      * @var bool
      */
     protected $hidden = false;
-    
+
     /**
      * __construct
      */
@@ -127,7 +127,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -140,7 +140,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->groups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-    
+
     /**
      * Returns the username
      *
@@ -150,7 +150,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->username;
     }
-    
+
     /**
      * Sets the username
      *
@@ -161,7 +161,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->username = $username;
     }
-    
+
     /**
      * Returns the password
      *
@@ -171,7 +171,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->password;
     }
-    
+
     /**
      * Sets the password
      *
@@ -182,7 +182,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->password = $password;
     }
-    
+
     /**
      * Returns the realName
      *
@@ -192,7 +192,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->realName;
     }
-    
+
     /**
      * Sets the realName
      *
@@ -203,7 +203,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->realName = $realName;
     }
-    
+
     /**
      * Returns the email
      *
@@ -213,7 +213,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->email;
     }
-    
+
     /**
      * Sets the email
      *
@@ -224,7 +224,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->email = $email;
     }
-    
+
     /**
      * Returns the description
      *
@@ -234,7 +234,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->description;
     }
-    
+
     /**
      * Sets the description
      *
@@ -245,7 +245,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->description = $description;
     }
-    
+
     /**
      * Returns the admin
      *
@@ -255,7 +255,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->admin;
     }
-    
+
     /**
      * Sets the admin
      *
@@ -266,7 +266,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->admin = $admin;
     }
-    
+
     /**
      * Returns the boolean state of admin
      *
@@ -276,7 +276,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->admin;
     }
-    
+
     /**
      * Returns the creationDate
      *
@@ -286,7 +286,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creationDate;
     }
-    
+
     /**
      * Sets the creationDate
      *
@@ -297,7 +297,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creationDate = $creationDate;
     }
-    
+
     /**
      * [getCrudBackendUserGroups description]
      *
@@ -312,7 +312,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
         return $objectStorage;
     }
-    
+
     /**
      * Adds a BackendUserGroup
      *
@@ -323,7 +323,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->groups->attach($groups);
     }
-    
+
     /**
      * Removes a BackendUserGroup
      *
@@ -334,7 +334,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->groups->detach($groupToRemove);
     }
-    
+
     /**
      * Returns the groups
      *
@@ -344,7 +344,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->groups;
     }
-    
+
     /**
      * Sets the groups
      *
@@ -355,7 +355,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->groups = $groups;
     }
-    
+
     /**
      * Returns the creator
      *
@@ -365,7 +365,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creator;
     }
-    
+
     /**
      * Sets the creator
      *
@@ -376,7 +376,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creator = $creator;
     }
-    
+
     /**
      * Returns the startTime
      *
@@ -386,7 +386,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->startTime;
     }
-    
+
     /**
      * Sets the startTime
      *
@@ -397,7 +397,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->startTime = $startTime;
     }
-    
+
     /**
      * Returns the endTime
      *
@@ -407,7 +407,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->endTime;
     }
-    
+
     /**
      * Sets the endTime
      *
@@ -418,7 +418,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->endTime = $endTime;
     }
-    
+
     /**
      * Returns the hidden
      *
@@ -428,7 +428,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->hidden;
     }
-    
+
     /**
      * Sets the hidden
      *
@@ -439,7 +439,7 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->hidden = $hidden;
     }
-    
+
     /**
      * Returns the boolean state of hidden
      *
@@ -450,4 +450,21 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->hidden;
     }
 
+    public function toDataArray()
+    {
+        $properties = [];
+        foreach ($this->_getProperties() as $propertyName) {
+            if ($this->_isDirty($propertyName)) {
+                $properties[$propertyName] = $this->_getProperty($propertyName);
+            }
+        }
+
+        $uid = $this->_isNew() ? uniqid('NEW_') : $this->uid;
+
+        return [
+            'be_users' => [
+                $uid => $properties,
+            ],
+        ];
+    }
 }
