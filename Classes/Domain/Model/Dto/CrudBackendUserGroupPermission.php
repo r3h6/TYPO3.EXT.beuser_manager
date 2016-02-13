@@ -27,10 +27,12 @@ namespace R3H6\BeuserManager\Domain\Model\Dto;
  ***************************************************************/
 
 /**
- * Allowed backend groups permission
+ * CrudBackendUserGroupPermission
  */
-class AllowedBackendGroupsPermission implements \ArrayAccess
+class CrudBackendUserGroupPermission implements \ArrayAccess
 {
+    const KEY = 'tx_beusermanager_crud';
+
     protected static $locallang = 'EXT:beuser_manager/Resources/Private/Language/locallang_be.xlf';
     protected $array = null;
 

@@ -27,14 +27,14 @@ namespace R3H6\BeuserManager\Domain\Model;
  ***************************************************************/
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository;
 
 /**
  * Backend user group
  */
 class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-    const ALLOWED_BACKEND_GROUPS_PERMISSION = 'tx_beusermanager_allowedbackendgroups';
-
     /**
      * Title
      *
@@ -135,16 +135,19 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->customOptions = $customOptions;
     }
 
-    public function getAllowedBackendGroups()
+    public function getCrudBackendUserGroups()
     {
         $customOptions = GeneralUtility::trimExplode(',', $this->customOptions, true);
-        $allowedBackendGroups = [];
+        $backendUserGroupUids = [];
         foreach ($customOptions as $optionValue) {
-            if (strpos($optionValue, self::ALLOWED_BACKEND_GROUPS_PERMISSION) === 0) {
-                $allowedBackendGroups[] = (int) substr($optionValue, strlen(self::ALLOWED_BACKEND_GROUPS_PERMISSION) + 1);
+            if (strpos($optionValue, \R3H6\BeuserManager\Domain\Model\Dto\CrudBackendUserGroupPermission::KEY) === 0) {
+                $backendUserGroupUids[] = (int) substr($optionValue, strlen(self::ALLOWED_BACKEND_GROUPS_PERMISSION) + 1);
             }
         }
-        return $allowedBackendGroups;
+
+        /** @var R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository $backendUserGroupRepository */
+        $backendUserGroupRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(BackendUserGroupRepository::class);
+        return $backendUserGroupRepository->findByUids($backendUserGroupUids);
     }
 
     /**

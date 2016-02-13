@@ -341,4 +341,12 @@ class BackendUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->createdBy = $createdBy;
     }
 
+
+    public function getCrudBackendUserGroups()
+    {
+        if ($this->usergroup) {
+            return $this->usergroup->getCrudBackendUserGroups();
+        }
+        return null;
+    }
 }

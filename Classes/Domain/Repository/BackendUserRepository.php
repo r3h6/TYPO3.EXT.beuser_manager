@@ -45,6 +45,10 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findDemanded(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand)
     {
+
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->getBackendUser()->getCrudBackendUserGroups());
+
+        return;
         /** @var TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
 
