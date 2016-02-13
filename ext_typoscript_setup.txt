@@ -9,7 +9,8 @@ config.tx_extbase{
                     tableName = be_users
                     columns {
                         crdate.mapOnProperty = creationDate
-                        cruser_id.mapOnProperty = createdBy
+                        cruser_id.mapOnProperty = creator
+                        usergroup.mapOnProperty = groups
                     }
                 }
             }
@@ -19,7 +20,8 @@ config.tx_extbase{
                     tableName = be_groups
                     columns {
                         crdate.mapOnProperty = creationDate
-                        cruser_id.mapOnProperty = createdBy
+                        cruser_id.mapOnProperty = creator
+                        subgroup.mapOnProperty = subGroups
                     }
                 }
             }

@@ -34,30 +34,27 @@ class BackendUserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     protected static $systemUsers = array('_cli_lowlevel', '_cli_scheduler');
-    
+
     public function getBackendUser()
     {
         return $this->findByIdentifier($GLOBALS['BE_USER']->user['uid']);
     }
-    
+
     /**
      * @param \R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand
      */
     public function findDemanded(\R3H6\BeuserManager\Domain\Model\Dto\BackendUserDemand $demand)
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->getBackendUser()->getCrudBackendUserGroups());
-        return;
         /** @var TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
         $constraints = array();
         $constraints[] = $query->logicalNot($query->in('username', static::$systemUsers));
         if (!$this->getBackendUser()->isAdmin()) {
             $constraints[] = $query->equals('admin', false);
+            $constraints[] = $query->in('groups', $this->getBackendUser()->getCrudBackendUserGroups());
         }
         $query->matching($query->logicalAnd($constraints));
-        // custom_options beuser_manager:2,beuser_manager:3,beuser_manager:1
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($grantedGroups);
+
         return $query->execute();
     }
-
 }
