@@ -90,5 +90,25 @@ class BackendUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
         $this->backendUserRepository->remove($backendUser);
         $this->redirect('list');
     }
+    
+    /**
+     * action hide
+     *
+     * @return void
+     */
+    public function hideAction()
+    {
+        
+    }
+    
+    /**
+     * action unhide
+     *
+     * @return void
+     */
+    public function unhideAction()
+    {
+        
+    }
 
 }

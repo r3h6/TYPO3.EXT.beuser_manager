@@ -14,8 +14,8 @@ if (TYPO3_MODE === 'BE') {
 		'manager',	// Submodule key
 		'',						// Position
 		array(
-			'BackendUser' => 'list, new, create, delete',
-
+			'BackendUser' => 'list, new, create, delete, hide, unhide',
+			
 		),
 		array(
 			'access' => 'user,group',

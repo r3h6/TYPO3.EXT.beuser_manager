@@ -16,7 +16,8 @@
                     "_default3_edit_update": false,
                     "_default4_delete": true,
                     "customActions": [
-
+                        "hide",
+                        "unhide"
                     ]
                 },
                 "name": "BackendUser",
@@ -104,6 +105,36 @@
                             "propertyName": "creationDate",
                             "propertyType": "DateTime",
                             "uid": "1155852450037"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "startTime",
+                            "propertyType": "DateTime",
+                            "uid": "230701909117"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "endTime",
+                            "propertyType": "DateTime",
+                            "uid": "467107090902"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "hidden",
+                            "propertyType": "Boolean",
+                            "uid": "616302714169"
                         }
                     ]
                 },
@@ -241,7 +272,7 @@
         "backendModules": [
             {
                 "actions": {
-                    "controllerActionCombinations": "BackendUser=>list,new,create,delete"
+                    "controllerActionCombinations": "BackendUser=>list,new,create,delete,hide,unhide"
                 },
                 "description": "Backend user manager",
                 "key": "manager",
@@ -331,7 +362,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-02-13 02:25",
+        "last_modified": "2016-02-13 03:28",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

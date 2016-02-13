@@ -4,8 +4,7 @@ namespace R3H6\BeuserManager\Domain\Model;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository;
-use \R3H6\BeuserManager\Domain\Model\Dto\CrudBackendUserGroupPermission;
-
+use R3H6\BeuserManager\Domain\Model\Dto\CrudBackendUserGroupPermission;
 /***************************************************************
  *
  *  Copyright notice
@@ -44,28 +43,28 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $title = '';
-
+    
     /**
      * Description
      *
      * @var string
      */
     protected $description = '';
-
+    
     /**
      * customOptions
      *
      * @var string
      */
     protected $customOptions = '';
-
+    
     /**
      * Creation date
      *
      * @var \DateTime
      */
     protected $creationDate = null;
-
+    
     /**
      * Created by
      *
@@ -73,7 +72,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $creator = null;
-
+    
     /**
      * Created by
      *
@@ -81,7 +80,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $subGroups = null;
-
+    
     /**
      * Returns the title
      *
@@ -91,7 +90,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->title;
     }
-
+    
     /**
      * Sets the title
      *
@@ -102,7 +101,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->title = $title;
     }
-
+    
     /**
      * Returns the description
      *
@@ -112,7 +111,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->description;
     }
-
+    
     /**
      * Sets the description
      *
@@ -123,7 +122,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->description = $description;
     }
-
+    
     /**
      * Returns the customOptions
      *
@@ -133,7 +132,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->customOptions;
     }
-
+    
     /**
      * Sets the customOptions
      *
@@ -144,7 +143,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->customOptions = $customOptions;
     }
-
+    
     /**
      * [getCrudBackendUserGroups description]
      *
@@ -154,15 +153,12 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         /** @var R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository $backendUserGroupRepository */
         $backendUserGroupRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(BackendUserGroupRepository::class);
-
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage */
         $objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-
         // Collect data from subgroups.
         foreach ($this->subGroups as $group) {
             $objectStorage->addAll($group->getCrudBackendUserGroups());
         }
-
         // Read custom permissions and add selected crud groups to the storage.
         foreach (GeneralUtility::trimExplode(',', $this->customOptions, true) as $optionValue) {
             if (strpos($optionValue, CrudBackendUserGroupPermission::KEY) === 0) {
@@ -175,7 +171,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
         return $objectStorage;
     }
-
+    
     /**
      * Returns the creationDate
      *
@@ -185,7 +181,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creationDate;
     }
-
+    
     /**
      * Sets the creationDate
      *
@@ -196,7 +192,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creationDate = $creationDate;
     }
-
+    
     /**
      * Returns the creator
      *
@@ -206,7 +202,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creator;
     }
-
+    
     /**
      * Sets the creator
      *
@@ -217,7 +213,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creator = $creator;
     }
-
+    
     /**
      * __construct
      */
@@ -226,7 +222,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-
+    
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -239,7 +235,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->subGroups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
-
+    
     /**
      * Adds a BackendUserGroup
      *
@@ -250,7 +246,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->subGroups->attach($subGroup);
     }
-
+    
     /**
      * Removes a BackendUserGroup
      *
@@ -261,7 +257,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->subGroups->detach($subGroupToRemove);
     }
-
+    
     /**
      * Returns the subGroups
      *
@@ -271,7 +267,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->subGroups;
     }
-
+    
     /**
      * Sets the subGroups
      *

@@ -230,6 +230,83 @@ class BackendUserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
+	public function getStartTimeReturnsInitialValueForDateTime()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getStartTime()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setStartTimeForDateTimeSetsStartTime()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setStartTime($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'startTime',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEndTimeReturnsInitialValueForDateTime()
+	{
+		$this->assertEquals(
+			NULL,
+			$this->subject->getEndTime()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setEndTimeForDateTimeSetsEndTime()
+	{
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setEndTime($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'endTime',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getHiddenReturnsInitialValueForBool()
+	{
+		$this->assertSame(
+			FALSE,
+			$this->subject->getHidden()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setHiddenForBoolSetsHidden()
+	{
+		$this->subject->setHidden(TRUE);
+
+		$this->assertAttributeEquals(
+			TRUE,
+			'hidden',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getGroupsReturnsInitialValueForBackendUserGroup()
 	{
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
