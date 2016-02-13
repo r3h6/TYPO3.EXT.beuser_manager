@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-13T15:28:49Z" product-name="beuser_manager">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-02-13T17:59:16Z" product-name="beuser_manager">
 		<header/>
 		<body>
 			<trans-unit id="tx_beusermanager_domain_model_backenduser">
@@ -33,8 +33,8 @@
 			<trans-unit id="tx_beusermanager_domain_model_backenduser.end_time">
 				<source>End Time</source>
 			</trans-unit>
-			<trans-unit id="tx_beusermanager_domain_model_backenduser.hidden">
-				<source>Hidden</source>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.disable">
+				<source>Disable</source>
 			</trans-unit>
 			<trans-unit id="tx_beusermanager_domain_model_backenduser.groups">
 				<source>Groups</source>
@@ -68,6 +68,9 @@
 			</trans-unit>
 			<trans-unit id="be_groups.tx_extbase_type.Tx_BeuserManager_BackendUserGroup">
 				<source>Backend user manager BackendUserGroup</source>
+			</trans-unit>
+			<trans-unit id="tx_beusermanager_domain_model_backenduser.hidden">
+				<source>Hidden</source>
 			</trans-unit>
 			<trans-unit id="tx_beusermanager_domain_model_backenduser.usergroup">
 				<source>Usergroup</source>

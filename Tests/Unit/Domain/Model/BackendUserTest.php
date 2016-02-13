@@ -282,24 +282,24 @@ class BackendUserTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
-	public function getHiddenReturnsInitialValueForBool()
+	public function getDisableReturnsInitialValueForBool()
 	{
 		$this->assertSame(
 			FALSE,
-			$this->subject->getHidden()
+			$this->subject->getDisable()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setHiddenForBoolSetsHidden()
+	public function setDisableForBoolSetsDisable()
 	{
-		$this->subject->setHidden(TRUE);
+		$this->subject->setDisable(TRUE);
 
 		$this->assertAttributeEquals(
 			TRUE,
-			'hidden',
+			'disable',
 			$this->subject
 		);
 	}
