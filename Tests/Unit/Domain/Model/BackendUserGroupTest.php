@@ -155,26 +155,82 @@ class BackendUserGroupTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 	/**
 	 * @test
 	 */
-	public function getCreatedByReturnsInitialValueForBackendUser()
+	public function getCreatorReturnsInitialValueForBackendUser()
 	{
 		$this->assertEquals(
 			NULL,
-			$this->subject->getCreatedBy()
+			$this->subject->getCreator()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setCreatedByForBackendUserSetsCreatedBy()
+	public function setCreatorForBackendUserSetsCreator()
 	{
-		$createdByFixture = new \R3H6\BeuserManager\Domain\Model\BackendUser();
-		$this->subject->setCreatedBy($createdByFixture);
+		$creatorFixture = new \R3H6\BeuserManager\Domain\Model\BackendUser();
+		$this->subject->setCreator($creatorFixture);
 
 		$this->assertAttributeEquals(
-			$createdByFixture,
-			'createdBy',
+			$creatorFixture,
+			'creator',
 			$this->subject
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getSubGroupsReturnsInitialValueForBackendUserGroup()
+	{
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getSubGroups()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setSubGroupsForObjectStorageContainingBackendUserGroupSetsSubGroups()
+	{
+		$subGroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$objectStorageHoldingExactlyOneSubGroups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneSubGroups->attach($subGroup);
+		$this->subject->setSubGroups($objectStorageHoldingExactlyOneSubGroups);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneSubGroups,
+			'subGroups',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addSubGroupToObjectStorageHoldingSubGroups()
+	{
+		$subGroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$subGroupsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$subGroupsObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($subGroup));
+		$this->inject($this->subject, 'subGroups', $subGroupsObjectStorageMock);
+
+		$this->subject->addSubGroup($subGroup);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeSubGroupFromObjectStorageHoldingSubGroups()
+	{
+		$subGroup = new \R3H6\BeuserManager\Domain\Model\BackendUserGroup();
+		$subGroupsObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$subGroupsObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($subGroup));
+		$this->inject($this->subject, 'subGroups', $subGroupsObjectStorageMock);
+
+		$this->subject->removeSubGroup($subGroup);
+
 	}
 }

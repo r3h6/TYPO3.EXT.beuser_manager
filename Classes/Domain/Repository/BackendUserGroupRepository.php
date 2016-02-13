@@ -32,13 +32,15 @@ namespace R3H6\BeuserManager\Domain\Repository;
 class BackendUserGroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
+    /**
+     * @param $uids
+     */
     public function findByUids($uids)
     {
         /** @var TYPO3\CMS\Extbase\Persistence\Generic\Query $query */
         $query = $this->createQuery();
-        $query->matching(
-            $query->in('uid', $uids)
-        );
+        $query->matching($query->in('uid', $uids));
         return $query->execute();
     }
+
 }

@@ -114,7 +114,7 @@
                             "lazyLoading": false,
                             "propertyIsExcludeField": false,
                             "relationDescription": "Usergroup",
-                            "relationName": "usergroup",
+                            "relationName": "groups",
                             "relationType": "zeroToMany",
                             "relationWire": "[wired]",
                             "uid": "427074151463"
@@ -124,7 +124,7 @@
                             "lazyLoading": true,
                             "propertyIsExcludeField": false,
                             "relationDescription": "Created by",
-                            "relationName": "createdBy",
+                            "relationName": "creator",
                             "relationType": "manyToOne",
                             "relationWire": "[wired]",
                             "uid": "175933638318"
@@ -217,10 +217,20 @@
                             "lazyLoading": true,
                             "propertyIsExcludeField": false,
                             "relationDescription": "Created by",
-                            "relationName": "createdBy",
+                            "relationName": "creator",
                             "relationType": "manyToOne",
                             "relationWire": "[wired]",
                             "uid": "1424658224793"
+                        },
+                        {
+                            "foreignRelationClass": "",
+                            "lazyLoading": true,
+                            "propertyIsExcludeField": false,
+                            "relationDescription": "Created by",
+                            "relationName": "subGroups",
+                            "relationType": "zeroToMany",
+                            "relationWire": "[wired]",
+                            "uid": "927306838430"
                         }
                     ]
                 }
@@ -306,10 +316,22 @@
                 "terminal": "SOURCES",
                 "uid": "1096507008643"
             }
+        },
+        {
+            "src": {
+                "moduleId": 1,
+                "terminal": "relationWire_1",
+                "uid": "927306838430"
+            },
+            "tgt": {
+                "moduleId": 1,
+                "terminal": "SOURCES",
+                "uid": "654207077695"
+            }
         }
     ],
     "log": {
-        "last_modified": "2016-02-12 07:57",
+        "last_modified": "2016-02-13 02:25",
         "extension_builder_version": "7.6.0",
         "be_user": " (1)"
     }

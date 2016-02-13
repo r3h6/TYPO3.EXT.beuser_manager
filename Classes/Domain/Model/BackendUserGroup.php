@@ -1,6 +1,10 @@
 <?php
 namespace R3H6\BeuserManager\Domain\Model;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -26,15 +30,12 @@ namespace R3H6\BeuserManager\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository;
-
 /**
  * Backend user group
  */
 class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+
     /**
      * Title
      *
@@ -42,36 +43,45 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @validate NotEmpty
      */
     protected $title = '';
-
+    
     /**
      * Description
      *
      * @var string
      */
     protected $description = '';
-
+    
     /**
      * customOptions
      *
      * @var string
      */
     protected $customOptions = '';
-
+    
     /**
      * Creation date
      *
      * @var \DateTime
      */
     protected $creationDate = null;
-
+    
     /**
      * Created by
      *
      * @var \R3H6\BeuserManager\Domain\Model\BackendUser
      * @lazy
      */
-    protected $createdBy = null;
-
+    protected $creator = null;
+    
+    /**
+     * Created by
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup>
+     * @cascade remove
+     * @lazy
+     */
+    protected $subGroups = null;
+    
     /**
      * Returns the title
      *
@@ -81,7 +91,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->title;
     }
-
+    
     /**
      * Sets the title
      *
@@ -92,7 +102,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->title = $title;
     }
-
+    
     /**
      * Returns the description
      *
@@ -102,7 +112,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->description;
     }
-
+    
     /**
      * Sets the description
      *
@@ -113,7 +123,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->description = $description;
     }
-
+    
     /**
      * Returns the customOptions
      *
@@ -123,7 +133,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->customOptions;
     }
-
+    
     /**
      * Sets the customOptions
      *
@@ -134,22 +144,21 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->customOptions = $customOptions;
     }
-
+    
     public function getCrudBackendUserGroups()
     {
         $customOptions = GeneralUtility::trimExplode(',', $this->customOptions, true);
-        $backendUserGroupUids = [];
+        $backendUserGroupUids = array();
         foreach ($customOptions as $optionValue) {
             if (strpos($optionValue, \R3H6\BeuserManager\Domain\Model\Dto\CrudBackendUserGroupPermission::KEY) === 0) {
                 $backendUserGroupUids[] = (int) substr($optionValue, strlen(self::ALLOWED_BACKEND_GROUPS_PERMISSION) + 1);
             }
         }
-
         /** @var R3H6\BeuserManager\Domain\Repository\BackendUserGroupRepository $backendUserGroupRepository */
         $backendUserGroupRepository = GeneralUtility::makeInstance(ObjectManager::class)->get(BackendUserGroupRepository::class);
         return $backendUserGroupRepository->findByUids($backendUserGroupUids);
     }
-
+    
     /**
      * Returns the creationDate
      *
@@ -159,7 +168,7 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->creationDate;
     }
-
+    
     /**
      * Sets the creationDate
      *
@@ -170,26 +179,91 @@ class BackendUserGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->creationDate = $creationDate;
     }
-
+    
     /**
-     * Returns the createdBy
+     * Returns the creator
      *
-     * @return \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     * @return \R3H6\BeuserManager\Domain\Model\BackendUser creator
      */
-    public function getCreatedBy()
+    public function getCreator()
     {
-        return $this->createdBy;
+        return $this->creator;
     }
-
+    
     /**
-     * Sets the createdBy
+     * Sets the creator
      *
-     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $createdBy
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUser $creator
      * @return void
      */
-    public function setCreatedBy(\R3H6\BeuserManager\Domain\Model\BackendUser $createdBy)
+    public function setCreator(\R3H6\BeuserManager\Domain\Model\BackendUser $creator)
     {
-        $this->createdBy = $createdBy;
+        $this->creator = $creator;
+    }
+    
+    /**
+     * __construct
+     */
+    public function __construct()
+    {
+        //Do not remove the next line: It would break the functionality
+        $this->initStorageObjects();
+    }
+    
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     *
+     * @return void
+     */
+    protected function initStorageObjects()
+    {
+        $this->subGroups = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+    
+    /**
+     * Adds a BackendUserGroup
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUserGroup $subGroup
+     * @return void
+     */
+    public function addSubGroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $subGroup)
+    {
+        $this->subGroups->attach($subGroup);
+    }
+    
+    /**
+     * Removes a BackendUserGroup
+     *
+     * @param \R3H6\BeuserManager\Domain\Model\BackendUserGroup $subGroupToRemove The BackendUserGroup to be removed
+     * @return void
+     */
+    public function removeSubGroup(\R3H6\BeuserManager\Domain\Model\BackendUserGroup $subGroupToRemove)
+    {
+        $this->subGroups->detach($subGroupToRemove);
+    }
+    
+    /**
+     * Returns the subGroups
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup> $subGroups
+     */
+    public function getSubGroups()
+    {
+        return $this->subGroups;
+    }
+    
+    /**
+     * Sets the subGroups
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\R3H6\BeuserManager\Domain\Model\BackendUserGroup> $subGroups
+     * @return void
+     */
+    public function setSubGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $subGroups)
+    {
+        $this->subGroups = $subGroups;
     }
 
 }
